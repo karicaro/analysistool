@@ -1,0 +1,21 @@
+%h1.title Create new Location of Interest
+
+= form_tag locations_path, :method => :post do
+
+  = label :location, :latitude, 'Latitude'
+  = text_field :location, :latitude
+
+  = label :location, :longitude, 'Longitude'
+  = text_field :location, :longitude
+
+  = label :location, :name, 'Name'
+  = text_field :location, :name
+
+  = label :location, :description, 'Description'
+  = text_area :location, :description
+
+  %p
+  = submit_tag 'Save Changes'
+
+%p
+= link_to 'Back to location list', locations_path

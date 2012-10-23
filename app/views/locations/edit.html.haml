@@ -1,0 +1,21 @@
+%h1.title Update existing Location
+
+= form_tag location_path(@location), :method => :put do
+
+  = label :location, :latitude, 'Latitude'
+  = text_field :location, :latitude
+
+  = label :location, :longitude, 'Longitude'
+  = text_field :location, :longitude
+
+  = label :location, :name, 'Name'
+  = text_field :location, :name
+
+  = label :location, :description, 'Description'
+  = text_area :location, :description
+
+  %p
+  = submit_tag 'Update Location Info'
+
+%p
+= link_to 'Back to location list', locations_path
