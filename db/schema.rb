@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120927210553) do
+ActiveRecord::Schema.define(:version => 20121025032326) do
 
   create_table "locations", :force => true do |t|
-    t.float  "latitude",    :limit => 53, :null => false
-    t.float  "longitude",   :limit => 53, :null => false
-    t.string "name"
-    t.string "description"
+    t.float   "latitude",    :limit => 53, :null => false
+    t.float   "longitude",   :limit => 53, :null => false
+    t.string  "name"
+    t.string  "description"
+    t.integer "timestamp"
   end
 
 end

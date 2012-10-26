@@ -8,7 +8,7 @@
 %table#table
   %thead
     %tr
-      %th Names
+      %th Name
       %th Latitude
       %th Longitude
       %th Description
@@ -17,7 +17,7 @@
   %tbody
     - @locations.each do |location|
       %tr
-        %td= location.name
+        %td= link_to location.name, location_path(location)
         %td= location.latitude
         %td= location.longitude
         %td= location.description
@@ -28,10 +28,32 @@
 
 %p=link_to "Create new location", new_location_path
 
+%p=link_to "Calculate Convex Hull", convex_locations_path
+
 %p=link_to "Delete all", destroy_all_locations_path, :method => :get, :confirm => 'Are you sure?'
+
+%h1 Type the coordinate to compare
+
+= form_tag compare_locations_path, :method => :get do
+
+  = label :coordinate, :latitude, 'Latitude'
+  = text_field :coordinate, :latitude
+
+  = label :coordinate, :longitude, 'Longitude'
+  = text_field :coordinate, :longitude
+
+  %p
+  = submit_tag 'Compare'
+
+%h1 Upload json file to compare
+= form_tag compareFile_locations_path do
+  = file_field_tag :json
+  = submit_tag 'Upload file'
+%p
 
 = javascript_include_tag '/assets/maps/OpenLayers'
 = javascript_include_tag '/assets/maps/locations'
 
 :javascript
   initMap($("#locations").val());
+

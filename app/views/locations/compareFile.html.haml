@@ -1,0 +1,28 @@
+%h1.title These are the locations of interest of your coordinates in the file:
+
+-# @coordinate = params[:coordinate]
+%p=@path
+
+%table#table
+  %thead
+    %tr
+      %th Name
+      %th Latitude
+      %th Longitude
+      %th Description
+      %th
+      %th
+  %tbody
+    - @output_array.each do |location|
+      %tr
+        %td= link_to location.name, location_path(location)
+        %td= location.latitude
+        %td= location.longitude
+        %td= location.description
+        %td= link_to "Edit", edit_location_path(location)
+        %td= link_to "Delete", location_path(location), :method => :delete, :confirm => 'Are you sure?'
+
+%p= show_flash
+
+%p
+= link_to 'Back to location list', locations_path

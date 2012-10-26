@@ -1,0 +1,54 @@
+%h1.title Convex Hull
+
+%h2.title Locations of Interest
+%table#table
+  %thead
+    %tr
+      %th Name
+      %th Latitude
+      %th Longitude
+      %th Description
+      %th
+      %th
+  %tbody
+    - @locations.each do |location|
+      %tr
+        %td= link_to location.name, location_path(location)
+        %td= location.latitude
+        %td= location.longitude
+        %td= location.description
+        %td= link_to "Edit", edit_location_path(location)
+        %td= link_to "Delete", location_path(location), :method => :delete, :confirm => 'Are you sure?'
+
+%h2.title Convex Hull Points
+
+%table#table
+  %thead
+    %tr
+      %th Name
+      %th Latitude
+      %th Longitude
+      %th Description
+      %th
+      %th
+  %tbody
+    - @convexHull.each do |location|
+      %tr
+        %td= link_to location.name, location_path(location)
+        %td= location.latitude
+        %td= location.longitude
+        %td= location.description
+        %td= link_to "Edit", edit_location_path(location)
+        %td= link_to "Delete", location_path(location), :method => :delete, :confirm => 'Are you sure?'
+
+
+%h2.title Convex Hull Perimeter
+%p='Convex Hull Perimeter: ' +@perimeter.to_s
+
+%h2.title The most distant location of interest visited from Home
+%p='Most Distant Location of Interest: '+@mDistant.name
+
+%p= show_flash
+
+%p
+= link_to 'Back to location list', locations_path

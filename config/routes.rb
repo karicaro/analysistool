@@ -3,9 +3,21 @@ Analysistool::Application.routes.draw do
 
   get "locations/new"
 
+  get "locations/convex"
+
+  post "locations/convex"
+
   get "locations/show"
 
   get "locations/edit"
+
+  get "locations/compare"
+
+  post "locations/compare"
+
+  get "locations/compareFile"
+
+  post "locations/compareFile"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -24,6 +36,9 @@ Analysistool::Application.routes.draw do
   resources :locations do
     collection do
       get :destroy_all
+      post :convex
+      post :compare
+      post :compareFile
     end
   end
 
