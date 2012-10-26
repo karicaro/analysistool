@@ -1,0 +1,18 @@
+%h1.title Compare coordinate by input
+
+%h1 Type the coordinate to compare
+
+= form_tag compare_locations_path, :method => :get do
+
+  = label :coordinate, :latitude, 'Latitude'
+  = text_field :coordinate, :latitude
+
+  = label :coordinate, :longitude, 'Longitude'
+  = text_field :coordinate, :longitude
+
+  %p
+  = submit_tag 'Compare'
+
+
+%p
+= link_to 'Back to location list', locations_path

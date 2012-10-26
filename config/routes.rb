@@ -1,22 +1,17 @@
 Analysistool::Application.routes.draw do
   get "locations/index"
-
   get "locations/new"
-
   get "locations/convex"
-
   post "locations/convex"
-
   get "locations/show"
-
   get "locations/edit"
-
+  get "locations/input"
+  post "locations/input"
+  get "locations/upload"
+  post "locations/upload"
   get "locations/compare"
-
   post "locations/compare"
-
   get "locations/compareFile"
-
   post "locations/compareFile"
 
   # The priority is based upon order of creation:
@@ -37,6 +32,8 @@ Analysistool::Application.routes.draw do
     collection do
       get :destroy_all
       post :convex
+      post :input
+      post :upload
       post :compare
       post :compareFile
     end

@@ -1,3 +1,6 @@
+require "json"
+require "tempfile"
+
 class LocationsController < ApplicationController
   def index
     # get all locations in the table locations
@@ -68,15 +71,20 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:location])
   end
 
+  def input
+
+  end
+
+  def upload
+
+  end
+
   def convex
     # default: render ’convex’ template (\app\views\locations\convex.html.haml)
     @locations = Location.all
     @convexHull = calculate(@locations)
     @perimeter = obtain_perimeter(@convexHull)
     @home = searchHome(@locations)
-
-    # @home=Location.find_all_by_name('Home')
-
     @mDistant =  more_distant(@convexHull, @home)
 
   end
@@ -91,7 +99,7 @@ class LocationsController < ApplicationController
     if !home.nil?
       return home
     else
-      "No hay ubicacion home"
+      "The location home doesnt exist"
     end
   end
 
@@ -113,20 +121,14 @@ class LocationsController < ApplicationController
 
   def compareFile
 
-    @locations=Location.all
+    @locations = Location.all
     @output_array = Array.new(0)
 
-    file=params[:json]
-      name=file
-      directory="public/"
-      @path=File.join(directory, name)
-
-      #File.open(@path,"wb+") do |f|
-      #f.write(file.read)
-      #end
-
-      f = File.read(@path)
-      coordinates = JSON.parse(f)
+    if !params[:file].nil?
+      @file=params[:file]
+      @filename=@file.original_filename
+      f = @file.tempfile.to_path.to_s
+      coordinates = JSON.parse(File.read(f))
 
       coordinates.each {|coord|
         @coordinate=Location.new(coord)
@@ -135,6 +137,7 @@ class LocationsController < ApplicationController
             @output_array.push(loc)
           end }
       }
+    end
   end
 
   def distance_float(l1, l2)

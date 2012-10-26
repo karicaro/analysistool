@@ -28,28 +28,13 @@
 
 %p=link_to "Create new location", new_location_path
 
+%p=link_to "Compare coordinate by input", input_locations_path
+
+%p=link_to "Compare coordinates by upload json file", upload_locations_path
+
 %p=link_to "Calculate Convex Hull", convex_locations_path
 
 %p=link_to "Delete all", destroy_all_locations_path, :method => :get, :confirm => 'Are you sure?'
-
-%h1 Type the coordinate to compare
-
-= form_tag compare_locations_path, :method => :get do
-
-  = label :coordinate, :latitude, 'Latitude'
-  = text_field :coordinate, :latitude
-
-  = label :coordinate, :longitude, 'Longitude'
-  = text_field :coordinate, :longitude
-
-  %p
-  = submit_tag 'Compare'
-
-%h1 Upload json file to compare
-= form_tag compareFile_locations_path do
-  = file_field_tag :json
-  = submit_tag 'Upload file'
-%p
 
 = javascript_include_tag '/assets/maps/OpenLayers'
 = javascript_include_tag '/assets/maps/locations'
