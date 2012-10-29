@@ -68,7 +68,7 @@ class LocationsController < ApplicationController
 
   def show
     # default: render ’show’ template (\app\views\locations\show.html.haml)
-    @location = Location.find(params[:location])
+    @location = Location.find(params[:id])
   end
 
   def input

@@ -1,0 +1,38 @@
+%h1.title Upload a json file
+
+.map
+ %div#map
+ %input#gps{:type => "hidden", :value => @gps_samples.to_json}
+
+
+%h2.title User Name:
+%p=@user.name
+
+= form_tag users_upload_path, :method => :post, :enctype=>"multipart/form-data" do
+ = file_field_tag :file
+ %input{:type => "hidden", :value=> @user.id, :name=>"id"}
+ = submit_tag 'Upload file'
+
+%table#table
+ %thead
+  %tr
+   %th Latitude
+   %th Longitude
+   %th Timestamp
+ %tbody
+  - @gps_samples.each do |gps|
+   %tr
+    %td= gps.latitude
+    %td= gps.longitude
+    %td= gps.timestamp
+
+
+%p= show_flash
+
+%p= link_to 'Back to user list', users_path
+
+= javascript_include_tag '/assets/maps/OpenLayers'
+= javascript_include_tag '/assets/maps/locations'
+
+:javascript
+  initMap($("#gps").val());

@@ -1,0 +1,9 @@
+%h1.title Existing User
+
+= form_tag location_path(@user), :method => :put do
+
+  = label :user, :name, 'Name: '+ @user.name
+
+  = label :user, :age, 'Age: '+ @user.age.to_s
+
+%p= link_to 'Back to user list', users_path

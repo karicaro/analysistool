@@ -1,0 +1,15 @@
+%h1.title Create new User
+
+= form_tag users_path, :method => :post do
+
+  = label :user, :name, 'Name'
+  = text_field :user, :name
+
+  = label :user, :age, 'Age'
+  = text_field :user, :age
+
+  %p
+  = submit_tag 'Save Changes'
+
+%p
+= link_to 'Back to user list', users_path

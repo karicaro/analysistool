@@ -14,6 +14,9 @@ Analysistool::Application.routes.draw do
   get "locations/compareFile"
   post "locations/compareFile"
 
+  get "users/upload"
+  post "users/upload"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -36,6 +39,12 @@ Analysistool::Application.routes.draw do
       post :upload
       post :compare
       post :compareFile
+    end
+  end
+
+  resources :users do
+    collection do
+      get :destroy_all
     end
   end
 

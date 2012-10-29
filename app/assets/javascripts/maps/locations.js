@@ -49,11 +49,16 @@ function initMap(locations) {
 
     for (var location in locationsJSON) {
         var locationPosition = new OpenLayers.LonLat(locationsJSON[location].longitude, locationsJSON[location].latitude).transform(fromProjection, toProjection);
-
+        var datetimestamp=locationsJSON[location].timestamp
+        //var dateconverted=new Date(datetimestamp).format('h:i:s')
+        var dateconverted= timeConverter(datetimestamp)
         var locationMarker = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(locationPosition.lon, locationPosition.lat), {
-                title: locationsJSON[location].name,
-                description: locationsJSON[location].description
+                title: locationsJSON[location].user_id,
+                description: dateconverted
+               // description: locationsJSON[location].description
+               // timeConverter(timestamp)
+                //new Date(timestamp).format('h:i:s')
             }
         );
 
@@ -77,6 +82,19 @@ function initMap(locations) {
         'featureselected': onFeatureSelect,
         'featureunselected': onFeatureUnselect
     });
+}
+
+function timeConverter(timestamp){
+    var a = new Date(timestamp);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date+','+month+' '+year+' '+hour+':'+min+':'+sec ;
+    return time;
 }
 
 function addMarker(layer, markerPosition, popupClass, popupContentHTML, closeBox, overflow) {
