@@ -16,6 +16,12 @@ Analysistool::Application.routes.draw do
 
   get "users/upload"
   post "users/upload"
+  get "users/activity"
+  post "users/activity"
+  get "users/activityAll"
+  post "users/activityAll"
+  get "users/delete"
+  post "users/delete"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

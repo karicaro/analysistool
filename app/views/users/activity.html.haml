@@ -1,0 +1,53 @@
+%h1.title Upload an activity Count (json) file
+= javascript_include_tag 'https://www.google.com/jsapi'
+
+:javascript
+ google.load('visualization', '1', {packages: ['corechart']});
+
+-#.map
+-# %div#map
+
+-# %input#gps{:type => "hidden", :value => @gps_samples.to_json}
+
+.container
+ %div#container
+ %input#acts{:type => "hidden", :value => @activity_samples.to_json}
+
+ %input#array{:type => "hidden", :value => @array}
+
+%h2.title User Name: #{@user.name}
+
+
+%p= link_to 'Back to user list', users_path
+
+= form_tag users_activity_path, :method => :post, :enctype=>"multipart/form-data" do
+ = file_field_tag :file
+ %input{:type => "hidden", :value=> @user.id, :name=>"id"}
+ = submit_tag 'Upload file'
+
+%table#table
+ %thead
+  %tr
+   %th Timestamp
+   %th Activity Count
+ %tbody
+  - @activity_samples.each do |act|
+   %tr
+    %td= act.timestamp
+    %td= act.count
+
+
+%p= show_flash
+
+-#%p=link_to "Delete all", delete_users_path, :method => :get, :confirm => 'Are you sure?'
+
+-#= javascript_include_tag '/assets/charts/highcharts'
+= javascript_include_tag '/assets/charts/charts'
+
+-#%script{:src => "https://www.google.com/jsapi", :type => "text/javascript"}
+
+-#%script{:type => "text/javascript",
+-#        :src  => "https://www.google.com/jsapi"}
+-#tengo que mandar el div como parametro porque la funcion lo usa.
+:javascript
+  drawVisualization($("#acts").val(),$("#container").val(),$("#array").val());

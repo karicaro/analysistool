@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029031307) do
+ActiveRecord::Schema.define(:version => 20121108070246) do
+
+  create_table "activity_samples", :force => true do |t|
+    t.integer "timestamp", :limit => 8, :null => false
+    t.integer "count",     :limit => 8, :null => false
+    t.integer "user_id"
+  end
 
   create_table "gps_samples", :force => true do |t|
     t.float   "latitude",  :limit => 53, :null => false

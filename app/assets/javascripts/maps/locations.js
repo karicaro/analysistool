@@ -82,6 +82,44 @@ function initMap(locations) {
         'featureselected': onFeatureSelect,
         'featureunselected': onFeatureUnselect
     });
+
+//Empieza lo de pintar una linea con diversas coordenadas
+    var lineLayer = new OpenLayers.Layer.Vector("Line Layer");
+
+    map.addLayer(lineLayer);
+    map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));
+
+    //// acomodar esto para agregar los puntos en una variable point
+
+    var points = new Array();
+    for (var loc in locationsJSON) {
+        var locationPosition2 = new OpenLayers.LonLat(locationsJSON[loc].longitude, locationsJSON[loc].latitude).transform(fromProjection, toProjection);
+        points.push(
+            new OpenLayers.Geometry.Point(locationPosition2.lon, locationPosition2.lat)
+        );
+
+       // player.push(new user("Main Player", 1, 1, "naked"));
+
+      //  locationsLayer.addFeatures(locationMarker);
+    }
+
+    ////
+
+  //  var points = new Array(
+    //    new OpenLayers.Geometry.Point(lon1, lat1),
+      //  new OpenLayers.Geometry.Point(lon2, lat2)
+    //);
+
+    var line = new OpenLayers.Geometry.LineString(points);
+
+    var style = {
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.5,
+        strokeWidth: 5
+    };
+
+    var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
+    lineLayer.addFeatures([lineFeature]);
 }
 
 function timeConverter(timestamp){

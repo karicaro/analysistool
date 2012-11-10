@@ -12,17 +12,21 @@
    %th Age
    %th
    %th
+   %th
  %tbody
   - @users.each do |user|
    %tr
     %td= link_to user.name, user_path(user)
     %td= user.age
     %td= link_to "Upload json file", users_upload_path(:id=> user.id)
+    %td= link_to "Upload activityCount (json) file", users_activity_path(:id=> user.id)
     %td= link_to "Delete", user_path(user), :method => :delete, :confirm => 'Are you sure?'
 
 %p= show_flash
 
 %p=link_to "Create new User", new_user_path
+
+%p=link_to "Show activity", users_activityAll_path
 
 %p=link_to "Delete all", destroy_all_users_path, :method => :get, :confirm => 'Are you sure?'
 

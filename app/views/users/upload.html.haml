@@ -5,8 +5,8 @@
  %input#gps{:type => "hidden", :value => @gps_samples.to_json}
 
 
-%h2.title User Name:
-%p=@user.name
+%h2.title User Name: #{@user.name}
+
 
 = form_tag users_upload_path, :method => :post, :enctype=>"multipart/form-data" do
  = file_field_tag :file
